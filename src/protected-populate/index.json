@@ -1,0 +1,28 @@
+{
+   "POST /api/blogs": {
+      "content-type": "api::blog.blog",
+      "roles": {
+         "authenticated": {},
+         "public": {
+            "fields": [
+               "title"
+            ],
+            "populate": {}
+         }
+      }
+   },
+   "GET /api/blogs": {
+      "content-type": "api::blog.blog",
+      "roles": {
+         "authenticated": {},
+         "public": {
+            "fields": [
+               "title"
+            ],
+            "populate": {
+               "tag": {}
+            }
+         }
+      }
+   }
+}

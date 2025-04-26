@@ -1,0 +1,75 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blogs",
+  "info": {
+    "singularName": "blog",
+    "pluralName": "blogs",
+    "displayName": "Blog",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100,
+      "minLength": 10
+    },
+    "tag": {
+      "displayName": "Tags",
+      "type": "component",
+      "repeatable": true,
+      "component": "blog-component.tags",
+      "max": 15
+    },
+    "view": {
+      "type": "integer",
+      "default": 0
+    },
+    "content": {
+      "type": "text"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "excerpt": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true
+    },
+    "Blog_status": {
+      "type": "enumeration",
+      "enum": [
+        "draft",
+        "published",
+        "archived"
+      ],
+      "default": "draft"
+    },
+    "authors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::author.author"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::categorie.categorie"
+    },
+    "seo_blog": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    },
+    "key": {
+      "type": "text"
+    }
+  }
+}

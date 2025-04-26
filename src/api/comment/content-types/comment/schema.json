@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "singularName": "comment",
+    "pluralName": "comments",
+    "displayName": "Comment",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "content": {
+      "type": "string"
+    },
+    "user_email": {
+      "type": "email"
+    },
+    "comment_status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "approved",
+        "spam"
+      ]
+    },
+    "blog_id": {
+      "type": "string"
+    }
+  }
+}

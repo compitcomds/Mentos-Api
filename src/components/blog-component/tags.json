@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_blog_component_tags",
+  "info": {
+    "displayName": "Tags",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "string"
+    }
+  }
+}
