@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "web_medias",
+  "info": {
+    "singularName": "web-media",
+    "pluralName": "web-medias",
+    "displayName": "Web-Media"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "alt": {
+      "type": "string"
+    },
+    "media": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "users": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "key": {
+      "type": "string"
+    }
+  }
+}

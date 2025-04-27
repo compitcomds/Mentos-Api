@@ -14,12 +14,17 @@ export interface BlogComponentTags extends Struct.ComponentSchema {
 export interface OtherImage extends Struct.ComponentSchema {
   collectionName: 'components_other_images';
   info: {
+    description: '';
     displayName: 'Image';
   };
   attributes: {
     alt: Schema.Attribute.String;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     name: Schema.Attribute.String;
+    tag: Schema.Attribute.Component<'blog-component.tags', true>;
+    web_media: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::web-media.web-media'
+    >;
   };
 }
 

@@ -59,7 +59,6 @@ export default factories.createCoreController('api::blog.blog', ({ strapi }) => 
 
     return blogs;
   },
-
   // Find one blog by key
   async findOne(ctx) {
     const { key } = ctx.query;

@@ -1,7 +1,8 @@
 {
   "collectionName": "components_other_images",
   "info": {
-    "displayName": "Image"
+    "displayName": "Image",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -11,15 +12,15 @@
     "alt": {
       "type": "string"
     },
-    "image": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false
+    "web_media": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::web-media.web-media"
+    },
+    "tag": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blog-component.tags"
     }
   }
 }
