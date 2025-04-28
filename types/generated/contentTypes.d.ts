@@ -1040,6 +1040,7 @@ export interface PluginUsersPermissionsUser
         minLength: 6;
       }>;
     full_name: Schema.Attribute.String;
+    key: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
