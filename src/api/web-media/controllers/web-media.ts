@@ -10,13 +10,55 @@ import { checkOwnership } from '../../../utils/check-ownership';
 
 export default factories.createCoreController('api::web-media.web-media', ({ strapi }) => ({
     async create(ctx) {
-    const user = ctx.state.user;
-    if (!user) {
-      return ctx.unauthorized('You must be logged in to create a media');
-    }
-    ctx.request.body.data.user = user.id;
-    return await super.create(ctx);
-  },
+        try {
+          const user = ctx.state.user;
+          if (!user) {
+            return ctx.unauthorized('You must be logged in to create a media');
+          }
+      
+          const { data, files } = ctx.request.body || {};
+      
+          if (!data) {
+            return ctx.badRequest('Missing data');
+          }
+      
+          let parsedData;
+          if (typeof data === 'string') {
+            try {
+              parsedData = JSON.parse(data);
+            } catch (error) {
+              return ctx.badRequest('Invalid JSON format in data');
+            }
+          } else {
+            parsedData = data;
+          }
+      
+          // Basic field validation (optional, but good practice)
+          const requiredFields = ['name', 'alt', 'key'];
+          const missingFields = requiredFields.filter((field) => !parsedData[field]);
+          if (missingFields.length > 0) {
+            return ctx.badRequest(`Missing required fields: ${missingFields.join(', ')}`);
+          }
+      
+          // Attach the authenticated user
+          parsedData.users = user.id;
+      
+          // Optionally auto-publish (uncomment if needed)
+          // parsedData.publishedAt = new Date();
+      
+          const createdEntry = await strapi.service('api::web-media.web-media').create({
+            data: parsedData,
+            files,
+          });
+      
+          return ctx.created({ data: createdEntry });
+        } catch (error) {
+          strapi.log.error('Error creating web-media:', error);
+          return ctx.internalServerError('Something went wrong while creating the media');
+        }
+      }
+                  
+,      
     async update(ctx) {
     const user = ctx.state.user;
     const id = ctx.params.id;
