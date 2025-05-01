@@ -4,7 +4,8 @@
   "info": {
     "singularName": "web-media",
     "pluralName": "web-medias",
-    "displayName": "Web-Media"
+    "displayName": "Web-Media",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,14 +18,15 @@
       "type": "string"
     },
     "media": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "users": {
       "type": "relation",
@@ -33,6 +35,11 @@
     },
     "key": {
       "type": "string"
+    },
+    "tags": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blog-component.tags"
     }
   }
 }

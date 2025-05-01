@@ -20,15 +20,18 @@
     "description": {
       "type": "text"
     },
-    "author_pic": {
-      "type": "component",
-      "repeatable": false,
-      "component": "other.image"
-    },
     "users": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "author_pics": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::web-media.web-media"
+    },
+    "key": {
+      "type": "string"
     }
   }
 }

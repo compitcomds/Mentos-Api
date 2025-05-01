@@ -27,6 +27,9 @@
     },
     "blog_id": {
       "type": "string"
+    },
+    "key": {
+      "type": "string"
     }
   }
 }
