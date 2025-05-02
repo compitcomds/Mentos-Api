@@ -5,7 +5,7 @@ module.exports = ({ env }) => ({
     config: {
       provider: 'local',
       providerOptions: {
-        uploadPath: env('UPLOADS_PATH', '/mnt/data/uploads'),
+        uploadPath: env('UPLOADS_PATH'),
       },
     },
   },

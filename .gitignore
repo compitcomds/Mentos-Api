@@ -130,3 +130,4 @@ mnt
 build
 .strapi-updater.json
 .strapi-cloud.json
+mnt/data/data.db
