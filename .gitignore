@@ -32,6 +32,7 @@ $RECYCLE.BIN/
 *.msp
 
 
+
 ############################
 # Packages
 ############################
@@ -70,7 +71,6 @@ $RECYCLE.BIN/
 *.sql
 *.sqlite
 *.sqlite3
-
 
 ############################
 # Misc.
@@ -126,6 +126,7 @@ license.txt
 exports
 .strapi
 dist
+mnt/data/data.db
 build
 .strapi-updater.json
 .strapi-cloud.json
