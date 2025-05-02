@@ -96,7 +96,8 @@ logs
 results
 node_modules
 .node_history
-public/uploads
+
+
 
 ############################
 # Package managers
