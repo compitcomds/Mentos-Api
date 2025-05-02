@@ -124,7 +124,7 @@ export default factories.createCoreController(
 
       const blogs = await strapi.entityService.findMany("api::blog.blog", {
         filters: { key },
-        populate: ["tag", "authors", "categories", "seo_blog", "users", "seo_blog.openGraph"],
+        populate: ["tag", "authors", "categories", "seo_blog","seo_blog.openGraph","image","seo_blog.metaImage","seo_blog.openGraph.ogImage"],
       });
 
       return blogs;
@@ -139,7 +139,7 @@ export default factories.createCoreController(
 
       const blogs = await strapi.entityService.findMany("api::blog.blog", {
         filters: { key },
-        populate: ["tag", "users", "authors", "categories", "seo_blog","seo_blog.openGraph"],
+        populate: ["tag", "authors", "categories", "seo_blog","seo_blog.openGraph","image","seo_blog.metaImage","seo_blog.openGraph.ogImage"],
         limit: 1,
       });
 
