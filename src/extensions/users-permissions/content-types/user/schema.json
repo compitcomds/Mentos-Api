@@ -76,6 +76,10 @@
     },
     "key": {
       "type": "string"
+    },
+    "media_size": {
+      "type": "integer",
+      "default": 50
     }
   }
 }
