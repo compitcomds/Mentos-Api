@@ -542,6 +542,45 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiEventEvent extends Struct.CollectionTypeSchema {
+  collectionName: 'events';
+  info: {
+    description: '';
+    displayName: 'Event';
+    pluralName: 'events';
+    singularName: 'event';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    category: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    des: Schema.Attribute.Text;
+    event_date_time: Schema.Attribute.DateTime;
+    event_status: Schema.Attribute.Enumeration<['Draft', 'Published']>;
+    key: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.String;
+    location_url: Schema.Attribute.String;
+    organizer_name: Schema.Attribute.String;
+    poster: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    publish_date: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    registration_link: Schema.Attribute.String;
+    Speakers: Schema.Attribute.Component<'blog-component.tags', true>;
+    target_audience: Schema.Attribute.Component<'blog-component.tags', true>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiWebMediaWebMedia extends Struct.CollectionTypeSchema {
   collectionName: 'web_medias';
   info: {
@@ -1096,6 +1135,7 @@ declare module '@strapi/strapi' {
       'api::blog.blog': ApiBlogBlog;
       'api::categorie.categorie': ApiCategorieCategorie;
       'api::comment.comment': ApiCommentComment;
+      'api::event.event': ApiEventEvent;
       'api::web-media.web-media': ApiWebMediaWebMedia;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

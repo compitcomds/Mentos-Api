@@ -1,0 +1,73 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "Event",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "category": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "event_date_time": {
+      "type": "datetime"
+    },
+    "location": {
+      "type": "string"
+    },
+    "location_url": {
+      "type": "string"
+    },
+    "des": {
+      "type": "text"
+    },
+    "organizer_name": {
+      "type": "string"
+    },
+    "poster": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "target_audience": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blog-component.tags"
+    },
+    "Speakers": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blog-component.tags"
+    },
+    "registration_link": {
+      "type": "string"
+    },
+    "event_status": {
+      "type": "enumeration",
+      "enum": [
+        "Draft",
+        "Published"
+      ]
+    },
+    "publish_date": {
+      "type": "datetime"
+    },
+    "key": {
+      "type": "string"
+    }
+  }
+}
