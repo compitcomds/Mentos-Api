@@ -148,7 +148,7 @@ export default factories.createCoreController(
 
       const blogs = await strapi.entityService.findMany("api::event.event", {
         filters: { key },
-        populate: [],
+        populate: ["target_audience","Speakers"],
         limit: 1,
       });
 
