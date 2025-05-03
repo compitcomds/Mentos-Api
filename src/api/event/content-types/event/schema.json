@@ -68,6 +68,11 @@
     },
     "key": {
       "type": "string"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
     }
   }
 }
