@@ -96,19 +96,31 @@ export default factories.createCoreController('api::web-media.web-media', ({ str
 
   async find(ctx) {
     const { key } = ctx.query;
-
+  
     if (!key) {
       return ctx.badRequest('Key is required');
     }
-
+  
+    // Extract and validate filters from the query
+    const filtersFromQuery = ctx.query.filters;
+    const otherQueryParams = { ...ctx.query };
+    delete otherQueryParams.filters;
+    delete otherQueryParams.key;
+  
+    const mergedFilters = {
+      ...(typeof filtersFromQuery === 'object' && filtersFromQuery !== null ? filtersFromQuery : {}),
+      key,
+    };
+  
     const webMedias = await strapi.entityService.findMany('api::web-media.web-media', {
-      filters: { key },
-      populate: ['media','tags'],
-
+      filters: mergedFilters,
+      populate: ['media', 'tags'],
+      ...otherQueryParams, // supports pagination, sort, etc.
     });
-
+  
     return webMedias;
   },
+  
   // Find one webMedia by key
   async findOne(ctx) {
     const { key } = ctx.query;

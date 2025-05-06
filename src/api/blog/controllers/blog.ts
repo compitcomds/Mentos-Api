@@ -117,18 +117,35 @@ export default factories.createCoreController(
 
     async find(ctx) {
       const { key } = ctx.query;
-
+    
       if (!key) {
         return ctx.badRequest("Key is required");
       }
-
+    
+      // Ensure filters is an object before using it
+      const filtersFromQuery = ctx.query.filters;
+      const otherQueryParams = { ...ctx.query };
+      delete otherQueryParams.filters;
+      delete otherQueryParams.key;
+    
+      const mergedFilters = {
+        ...(typeof filtersFromQuery === 'object' && filtersFromQuery !== null ? filtersFromQuery : {}),
+        key,
+      };
+    
       const blogs = await strapi.entityService.findMany("api::blog.blog", {
-        filters: { key },
-        populate: ["tag", "authors", "categories", "seo_blog","seo_blog.openGraph","image","seo_blog.metaImage","seo_blog.openGraph.ogImage"],
+        filters: mergedFilters,
+        populate: [
+          "tag", "authors", "categories", "seo_blog",
+          "seo_blog.openGraph", "image",
+          "seo_blog.metaImage", "seo_blog.openGraph.ogImage"
+        ],
+        ...otherQueryParams,
       });
-
+    
       return blogs;
-    },
+    }
+,    
 
     async findOne(ctx) {
       const { key } = ctx.query;

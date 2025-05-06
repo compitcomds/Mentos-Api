@@ -126,19 +126,31 @@ export default factories.createCoreController(
 
     async find(ctx) {
       const { key } = ctx.query;
-
+    
       if (!key) {
         return ctx.badRequest("Key is required");
       }
-
+    
+      // Safely extract filters from query
+      const filtersFromQuery = ctx.query.filters;
+      const otherQueryParams = { ...ctx.query };
+      delete otherQueryParams.filters;
+      delete otherQueryParams.key;
+    
+      const mergedFilters = {
+        ...(typeof filtersFromQuery === 'object' && filtersFromQuery !== null ? filtersFromQuery : {}),
+        key,
+      };
+    
       const blogs = await strapi.entityService.findMany("api::event.event", {
-        filters: { key },
-        populate: ["target_audience","Speakers"],
+        filters: mergedFilters,
+        populate: ["target_audience", "Speakers"],
+        ...otherQueryParams,
       });
-
+    
       return blogs;
-    },
-
+    }
+,    
     async findOne(ctx) {
       const { key } = ctx.query;
 
