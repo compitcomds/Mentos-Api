@@ -585,6 +585,42 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiQueryFormQueryForm extends Struct.CollectionTypeSchema {
+  collectionName: 'query_forms';
+  info: {
+    description: '';
+    displayName: 'query_form';
+    pluralName: 'query-forms';
+    singularName: 'query-form';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    key: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::query-form.query-form'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    other_meta: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiWebMediaWebMedia extends Struct.CollectionTypeSchema {
   collectionName: 'web_medias';
   info: {
@@ -1140,6 +1176,7 @@ declare module '@strapi/strapi' {
       'api::categorie.categorie': ApiCategorieCategorie;
       'api::comment.comment': ApiCommentComment;
       'api::event.event': ApiEventEvent;
+      'api::query-form.query-form': ApiQueryFormQueryForm;
       'api::web-media.web-media': ApiWebMediaWebMedia;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

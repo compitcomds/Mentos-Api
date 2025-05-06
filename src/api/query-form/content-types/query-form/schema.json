@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "query_forms",
+  "info": {
+    "singularName": "query-form",
+    "pluralName": "query-forms",
+    "displayName": "query_form",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "other_meta": {
+      "type": "json"
+    },
+    "key": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
