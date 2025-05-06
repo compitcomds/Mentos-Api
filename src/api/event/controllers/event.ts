@@ -24,53 +24,52 @@ export default factories.createCoreController(
     //   return await (this as any).super.create(ctx); // ✅ Correct in Strapi v5
     // },
 
-        async create(ctx) {
-            try {
-              const user = ctx.state.user;
-              if (!user) {
-                return ctx.unauthorized('You must be logged in to create a Blog');
-              }
-          
-              const { data, files } = ctx.request.body || {};
-              
-              if (!data) {
-                return ctx.badRequest('Missing data');
-              }
-          
-              let parsedData;
-              if (typeof data === 'string') {
-                try {
-                  parsedData = JSON.parse(data);
-                } catch (error) {
-                  return ctx.badRequest('Invalid JSON format in data');
-                }
-              } else {
-                parsedData = data;
-              }
-              const requiredFields = ['key'];
-              const missingFields = requiredFields.filter((field) => !parsedData[field]);
-              if (missingFields.length > 0) {
-                return ctx.badRequest(`Missing required fields: ${missingFields.join(', ')}`);
-              }
-          
-              // Attach the authenticated user
-              parsedData.users = user.id;
-          
-              // Optionally auto-publish (uncomment if needed)
-              // parsedData.publishedAt = new Date();
-          
-              const createdEntry = await strapi.service('api::event.event').create({
-                data: parsedData,
-                files,
-              });
-          
-              return ctx.created({ data: createdEntry });
-            } catch (error) {
-              strapi.log.error('Error creating blog', error);
-              return ctx.internalServerError('Something went wrong while creating the blog');
-            }
+    async create(ctx) {
+        try {
+          const user = ctx.state.user;
+          if (!user) {
+            return ctx.unauthorized('You must be logged in to create a Blog');
           }
-              ,
+      
+          const { data, files } = ctx.request.body || {};
+          
+          if (!data) {
+            return ctx.badRequest('Missing data');
+          }
+      
+          let parsedData;
+          if (typeof data === 'string') {
+            try {
+              parsedData = JSON.parse(data);
+            } catch (error) {
+              return ctx.badRequest('Invalid JSON format in data');
+            }
+          } else {
+            parsedData = data;
+          }
+          const requiredFields = ['key'];
+          const missingFields = requiredFields.filter((field) => !parsedData[field]);
+          if (missingFields.length > 0) {
+            return ctx.badRequest(`Missing required fields: ${missingFields.join(', ')}`);
+          }
+      
+          // Attach the authenticated user
+          parsedData.users = user.id;
+      
+          // Optionally auto-publish (uncomment if needed)
+          // parsedData.publishedAt = new Date();
+      
+          const createdEntry = await strapi.service('api::event.event').create({
+            data: parsedData,
+            files,
+          });
+      
+          return ctx.created({ data: createdEntry });
+        } catch (error) {
+          strapi.log.error('Error creating blog', error);
+          return ctx.internalServerError('Something went wrong while creating the blog');
+        }
+      },
     async update(ctx) {
       const user = ctx.state.user;
       const id = ctx.params.id;
@@ -101,7 +100,6 @@ export default factories.createCoreController(
         data: updatedBlog,
       });
     },
-
     async delete(ctx) {
       const user = ctx.state.user;
       const id = ctx.params.id;
@@ -123,7 +121,6 @@ export default factories.createCoreController(
 
       ctx.body = { message: "Blog post deleted successfully" };
     },
-
     async find(ctx) {
       const { key } = ctx.query;
     
@@ -149,8 +146,7 @@ export default factories.createCoreController(
       });
     
       return blogs;
-    }
-,    
+    },    
     async findOne(ctx) {
       const { key } = ctx.query;
 
@@ -167,7 +163,6 @@ export default factories.createCoreController(
       if (!blogs || blogs.length === 0) {
         return ctx.notFound("Blog not found");
       }
-
       return blogs[0];
     },
   })
