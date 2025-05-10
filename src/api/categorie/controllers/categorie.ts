@@ -201,7 +201,7 @@ export default factories.createCoreController(
       }
 
       const blogs = await strapi.entityService.findMany("api::categorie.categorie", {
-        filters: { key },
+        filters: { key ,id: ctx.params.id},
         limit: 1,
       });
 

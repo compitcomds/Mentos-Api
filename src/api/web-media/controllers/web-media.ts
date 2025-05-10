@@ -130,7 +130,7 @@ export default factories.createCoreController('api::web-media.web-media', ({ str
     }
 
     const webMedia = await strapi.entityService.findMany('api::web-media.web-media', {
-      filters: { key },
+      filters: { key , id: ctx.params.id },
       populate: ['media'],
       limit: 1,
     });

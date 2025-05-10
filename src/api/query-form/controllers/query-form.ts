@@ -33,7 +33,7 @@ export default factories.createCoreController('api::query-form.query-form', ({ s
     }
 
     const entries = await strapi.entityService.findMany('api::query-form.query-form', {
-      filters: { key: user.key },
+      filters: { key: user.key,id: ctx.params.id },
       populate: '*',
       limit: 1,
     });
