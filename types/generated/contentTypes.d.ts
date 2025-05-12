@@ -447,6 +447,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     seo_blog: Schema.Attribute.Component<'shared.seo', false>;
     slug: Schema.Attribute.String & Schema.Attribute.Required;
+    SubCategory: Schema.Attribute.String;
     tag: Schema.Attribute.Component<'blog-component.tags', true> &
       Schema.Attribute.SetMinMax<
         {

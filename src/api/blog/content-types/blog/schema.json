@@ -81,6 +81,9 @@
         "videos",
         "audios"
       ]
+    },
+    "SubCategory": {
+      "type": "string"
     }
   }
 }
